@@ -85,6 +85,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <ExecutablePath>D:\Dropbox\Libraries\KAISION_2.0\bin;D:\Dropbox\Libraries\VCL_3DO_Lib_2.0\bin;D:\Dropbox\Libraries\opencv\build\x64\vc14\bin;$(ExecutablePath)</ExecutablePath>
+    <IncludePath>D:\Dropbox\Libraries\KAISION_2.0\include;D:\Dropbox\Libraries\VCL_3DO_Lib_2.0\include;D:\Dropbox\Libraries\opencv\build\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Dropbox\Libraries\KAISION_2.0\lib;D:\Dropbox\Libraries\VCL_3DO_Lib_2.0\lib;D:\Dropbox\Libraries\opencv\build\x64\vc14\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -170,6 +173,7 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>kaision_algebra.lib;kaision_array.lib;kaision_bootstrap.lib;kaision_camera_digital.lib;kaision_classifier.lib;kaision_color.lib;kaision_depth.lib;kaision_geometry.lib;kaision_grabber.lib;kaision_graph_line.lib;kaision_graph_xy.lib;kaision_graph3D.lib;kaision_hello.lib;kaision_io.lib;kaision_jpeg.lib;kaision_object_geometric.lib;kaision_screen.lib;kaision_screen3D.lib;kaision_sound.lib;kaision_tempo.lib;MFCLibrary_VCL_3DO.lib;opencv_world330.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
