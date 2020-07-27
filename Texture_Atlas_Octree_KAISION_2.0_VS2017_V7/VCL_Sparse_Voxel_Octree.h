@@ -38,7 +38,6 @@ public:
 	bool ssvo_Save_Sparse_Voxel_Octree_String(CKvString in_filename, double *out_memory_byte_or_NULL);
 
 protected:
-
 	void gv_Generate_Volume(CKvVolumeBool *out_volume);
 	VCL_Node srn_Set_Root_node();	
 	VCL_Node srn_Set_Root_node(CKvSet_of_Voxel *in_set_of_voxel);

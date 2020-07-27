@@ -5,6 +5,9 @@
 
 #pragma once
 
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console") //Dos prompt 
+
+
 #ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN            // 거의 사용되지 않는 내용은 Windows 헤더에서 제외합니다.
 #endif
@@ -34,10 +37,33 @@
 #include <afxcontrolbars.h>     // MFC의 리본 및 컨트롤 막대 지원
 
 
+//KAISION
+#include <stdint.h>
+#include <_sdkim_2008_algebra.h>
+#include <_sdkim_2008_array.h>
+#include <_sdkim_2008_bootstrap.h>
+#include <_sdkim_2008_camera_digital.h>
+#include <_sdkim_2008_classifier.h>
+#include <_sdkim_2008_color.h>
+#include <_sdkim_2008_depth.h>
+#include <_sdkim_2008_geometry.h>
+#include <_sdkim_2008_grabber.h>
+#include <_sdkim_2008_graph_3d.h>
+#include <_sdkim_2008_graph_line.h>
+#include <_sdkim_2008_graph_xy.h>
+#include <_sdkim_2008_hello.h>
+#include <_sdkim_2008_io.h>
+#include <_sdkim_2008_jpeg.h>
+#include <_sdkim_2008_object_geometric.h>
+#include <_sdkim_2008_screen.h>
+#include <_sdkim_2008_screen3D.h>
+#include <_sdkim_2008_sound.h>
+#include <_sdkim_2008_tempo.h>
+//#include <_sdkim_2016_matlab.h>
 
-
-
-
+//VCL_3DO_Lib
+#include <_VCL_3DO_HEADERS.h>
+#include "VCL_DoCube_X_Color.h"
 
 
 

@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\Extern_Code">
+      <UniqueIdentifier>{c24f54b2-92da-4b64-a2ba-a614d6f0bd52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\ExternCode">
+      <UniqueIdentifier>{78595275-5d3b-4506-b0be-9ded09b1b709}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture_Atlas_Octree_KAISION_2.0_VS2017_V7.h">
@@ -30,6 +36,69 @@
     <ClInclude Include="Resource.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Voxel_Slice_Scanned_Data.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Voxel_Texture_Atlas_3_Direction.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Voxel_Segmentation.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Voxel_Scanner_Slice.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Voxel_Color_Sequence_Aligner_PWEI.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Voxel_Color_Sequence_Aligner_DTW.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Voxel_Color_Sequence_Aligner_Distance.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Voxel_Color_Sequence_Aligner_Connectivity.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Voxel_Color_Sequence_Aligner_Color.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Voxel_Color_Sequence_Aligner_Base.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Voxel_Color_Sequence_Aligner.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Voxel_Color_Map.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Voxel_Color_Final_Version.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Image_Interpolation.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_EI_DCT.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_DoCube_X_Color.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="JANG_Xrunset3dShort.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="Funtion_IO.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Node.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_Sparse_Voxel_Octree.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
+    <ClInclude Include="VCL_DTW.h">
+      <Filter>헤더 파일\ExternCode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Texture_Atlas_Octree_KAISION_2.0_VS2017_V7.cpp">
@@ -40,6 +109,69 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Funtion_IO.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="JANG_Xrunset3dShort.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_DoCube_X_Color.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_EI_DCT.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Image_Interpolation.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Voxel_Color_Final_Version.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Voxel_Color_Map.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Voxel_Color_Sequence_Aligner.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Voxel_Color_Sequence_Aligner_Base.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Voxel_Color_Sequence_Aligner_Color.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Voxel_Color_Sequence_Aligner_Connectivity.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Voxel_Color_Sequence_Aligner_Distance.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Voxel_Color_Sequence_Aligner_DTW.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Voxel_Color_Sequence_Aligner_PWEI.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Voxel_Scanner_Slice.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Voxel_Segmentation.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Voxel_Texture_Atlas_3_Direction.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Voxel_Slice_Scanned_Data.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Node.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Sparse_Voxel_Octree.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_DTW.cpp">
+      <Filter>소스 파일\Extern_Code</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
