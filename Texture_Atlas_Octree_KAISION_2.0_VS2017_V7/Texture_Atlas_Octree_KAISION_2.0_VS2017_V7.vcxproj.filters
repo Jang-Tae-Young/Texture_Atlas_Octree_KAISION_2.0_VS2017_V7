@@ -19,6 +19,12 @@
     <Filter Include="헤더 파일\ExternCode">
       <UniqueIdentifier>{78595275-5d3b-4506-b0be-9ded09b1b709}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Octree_based_Texture_Atlas">
+      <UniqueIdentifier>{d655c0e7-62d0-4afd-8a1e-232d57e8659b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Octree_based_Texture_Atlas">
+      <UniqueIdentifier>{20e62b73-abf3-4999-9d3d-59f80496d92e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Texture_Atlas_Octree_KAISION_2.0_VS2017_V7.h">
@@ -99,6 +105,9 @@
     <ClInclude Include="VCL_DTW.h">
       <Filter>헤더 파일\ExternCode</Filter>
     </ClInclude>
+    <ClInclude Include="VCL_Octree_Texture_Atlas.h">
+      <Filter>헤더 파일\Octree_based_Texture_Atlas</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Texture_Atlas_Octree_KAISION_2.0_VS2017_V7.cpp">
@@ -172,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="VCL_DTW.cpp">
       <Filter>소스 파일\Extern_Code</Filter>
+    </ClCompile>
+    <ClCompile Include="VCL_Octree_Texture_Atlas.cpp">
+      <Filter>소스 파일\Octree_based_Texture_Atlas</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

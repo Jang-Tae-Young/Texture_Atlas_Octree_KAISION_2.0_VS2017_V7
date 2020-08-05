@@ -213,6 +213,7 @@
     <ClInclude Include="VCL_Voxel_Segmentation.h" />
     <ClInclude Include="VCL_Voxel_Texture_Atlas_3_Direction.h" />
     <ClInclude Include="Voxel_Slice_Scanned_Data.h" />
+    <ClInclude Include="VCL_Octree_Texture_Atlas.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Funtion_IO.cpp" />
@@ -244,6 +245,7 @@
     <ClCompile Include="VCL_Voxel_Segmentation.cpp" />
     <ClCompile Include="VCL_Voxel_Texture_Atlas_3_Direction.cpp" />
     <ClCompile Include="Voxel_Slice_Scanned_Data.cpp" />
+    <ClCompile Include="VCL_Octree_Texture_Atlas.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TextureAtlasOctreeKAISION20VS2017V7.rc" />

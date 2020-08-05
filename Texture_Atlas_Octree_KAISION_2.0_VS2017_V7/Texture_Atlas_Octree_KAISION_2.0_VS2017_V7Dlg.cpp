@@ -6,15 +6,18 @@
 #include "Texture_Atlas_Octree_KAISION_2.0_VS2017_V7.h"
 #include "Texture_Atlas_Octree_KAISION_2.0_VS2017_V7Dlg.h"
 #include "afxdialogex.h"
+/************************************************************/
+#include <vector>
+/************************************************************/
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
-
+/************************************************************************/
 // 응용 프로그램 정보에 사용되는 CAboutDlg 대화 상자입니다.
-
 class CAboutDlg : public CDialogEx
+/************************************************************************/
 {
 public:
 	CAboutDlg();
@@ -31,45 +34,48 @@ public:
 protected:
 	DECLARE_MESSAGE_MAP()
 };
-
+/************************************************************************/
 CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
+/************************************************************************/
 {
 }
-
+/************************************************************************/
 void CAboutDlg::DoDataExchange(CDataExchange* pDX)
+/************************************************************************/
 {
 	CDialogEx::DoDataExchange(pDX);
 }
+/************************************************************************/
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
+/************************************************************************/
 // CTextureAtlasOctreeKAISION20VS2017V7Dlg 대화 상자
-
-
-
 CTextureAtlasOctreeKAISION20VS2017V7Dlg::CTextureAtlasOctreeKAISION20VS2017V7Dlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_TEXTURE_ATLAS_OCTREE_KAISION_20_VS2017_V7_DIALOG, pParent)
+/************************************************************************/
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
-
+/************************************************************************/
 void CTextureAtlasOctreeKAISION20VS2017V7Dlg::DoDataExchange(CDataExchange* pDX)
+/************************************************************************/
 {
 	CDialogEx::DoDataExchange(pDX);
 }
-
+/************************************************************************/
 BEGIN_MESSAGE_MAP(CTextureAtlasOctreeKAISION20VS2017V7Dlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_DEBUG, &CTextureAtlasOctreeKAISION20VS2017V7Dlg::OnBnClickedDebug)
 END_MESSAGE_MAP()
-
-
+/************************************************************************/
 // CTextureAtlasOctreeKAISION20VS2017V7Dlg 메시지 처리기
-
 BOOL CTextureAtlasOctreeKAISION20VS2017V7Dlg::OnInitDialog()
+/************************************************************************/
 {
 	CDialogEx::OnInitDialog();
 
@@ -102,8 +108,9 @@ BOOL CTextureAtlasOctreeKAISION20VS2017V7Dlg::OnInitDialog()
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
-
+/************************************************************************/
 void CTextureAtlasOctreeKAISION20VS2017V7Dlg::OnSysCommand(UINT nID, LPARAM lParam)
+/************************************************************************/
 {
 	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
 	{
@@ -115,12 +122,12 @@ void CTextureAtlasOctreeKAISION20VS2017V7Dlg::OnSysCommand(UINT nID, LPARAM lPar
 		CDialogEx::OnSysCommand(nID, lParam);
 	}
 }
-
+/************************************************************************/
 // 대화 상자에 최소화 단추를 추가할 경우 아이콘을 그리려면
 //  아래 코드가 필요합니다.  문서/뷰 모델을 사용하는 MFC 응용 프로그램의 경우에는
 //  프레임워크에서 이 작업을 자동으로 수행합니다.
-
 void CTextureAtlasOctreeKAISION20VS2017V7Dlg::OnPaint()
+/************************************************************************/
 {
 	if (IsIconic())
 	{
@@ -144,11 +151,42 @@ void CTextureAtlasOctreeKAISION20VS2017V7Dlg::OnPaint()
 		CDialogEx::OnPaint();
 	}
 }
-
+/************************************************************************/
 // 사용자가 최소화된 창을 끄는 동안에 커서가 표시되도록 시스템에서
 //  이 함수를 호출합니다.
 HCURSOR CTextureAtlasOctreeKAISION20VS2017V7Dlg::OnQueryDragIcon()
+/************************************************************************/
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
+/************************************************************************/
+void CTextureAtlasOctreeKAISION20VS2017V7Dlg::OnBnClickedDebug()
+/************************************************************************/
+{
+	std::vector<int> tmp;
+	int val;
 
+	for (auto i = 0; i < 10; i++)
+	{
+		val = rand();
+		tmp.push_back(val);
+	}
+
+	for (int i = 0; i < tmp.size(); i++)
+	{
+		printf("%d) %d\n", i, tmp[i]);
+	}
+	
+	printf("==================================\n");
+	int count = 0;
+	for (auto i : tmp)
+	{
+		printf("%d) %d\n", count, i);
+		count++;
+	}
+
+
+
+
+}
+/************************************************************************/
