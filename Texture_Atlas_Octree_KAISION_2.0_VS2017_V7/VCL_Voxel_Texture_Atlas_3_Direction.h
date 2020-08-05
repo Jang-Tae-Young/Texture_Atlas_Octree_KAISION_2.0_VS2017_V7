@@ -53,7 +53,6 @@ public:
 		CKvSet_of_MatrixInt *out_voxel_idx_maps,
 		CKvMatrixInt *out_pt_list_for_secong_img_N_by_3);
 
-
 	bool sim_Save_Index_Map(
 		CKvString str,
 		CKvMatrixInt *in_index_map);

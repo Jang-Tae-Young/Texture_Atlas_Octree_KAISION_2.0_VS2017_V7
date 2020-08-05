@@ -34,3 +34,16 @@ Texture_Atlas_Octree_KAISION_2.0_VS2017_V7/x64/Release/Texture_Atlas_Octree_KAIS
 .vs/Texture_Atlas_Octree_KAISION_2.0_VS2017_V7/v15/Browse.VC.db
 .vs/Texture_Atlas_Octree_KAISION_2.0_VS2017_V7/v15/.suo
 *.db
+*.db
+*.vcxproj
+*.filters
+*.user
+*.rc
+.vs/Texture_Atlas_Octree_KAISION_2.0_VS2017_V7/v15/.suo
+.vs/Texture_Atlas_Octree_KAISION_2.0_VS2017_V7/v15/Browse.VC.db
+Texture_Atlas_Octree_KAISION_2.0_VS2017_V7/Texture_Atlas_Octree_KAISION_2.0_VS2017_V7.vcxproj
+Texture_Atlas_Octree_KAISION_2.0_VS2017_V7/Texture_Atlas_Octree_KAISION_2.0_VS2017_V7.vcxproj.filters
+Texture_Atlas_Octree_KAISION_2.0_VS2017_V7/Texture_Atlas_Octree_KAISION_2.0_VS2017_V7.vcxproj.user
+Texture_Atlas_Octree_KAISION_2.0_VS2017_V7/TextureAtlasOctreeKAISION20VS2017V7.rc
+*.dll
+Texture_Atlas_Octree_KAISION_2.0_VS2017_V7/x64/Release/RCa19288
