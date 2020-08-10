@@ -8,6 +8,7 @@
 #include "afxdialogex.h"
 /************************************************************/
 #include <vector>
+#include "Funtion_IO.h"
 /************************************************************/
 
 #ifdef _DEBUG
@@ -163,27 +164,106 @@ HCURSOR CTextureAtlasOctreeKAISION20VS2017V7Dlg::OnQueryDragIcon()
 void CTextureAtlasOctreeKAISION20VS2017V7Dlg::OnBnClickedDebug()
 /************************************************************************/
 {
-	std::vector<int> tmp;
-	int val;
+	UpdateData(true);
+	LCKvIO io;
+	CKvString file_name;
+	CKvDepot_of_Point3Df voxels;
+	CKvDepot_of_RgbaF colors;
+	int ww, hh, dd;
 
-	for (auto i = 0; i < 10; i++)
+	std::vector<VCL_DoCube_X_Color> vecDoCube;
+
+
+	if (!io.gof_Get_Open_Filename(".ply file", file_name))
 	{
-		val = rand();
-		tmp.push_back(val);
+		return;
 	}
 
-	for (int i = 0; i < tmp.size(); i++)
+	printf("[Load Ply]......\n");
+	ww = hh = dd = 1024;
+
+	lm_Load_Ply_File_for_Vertex_Color2(
+		file_name,//CKvString &in_filename,
+		ww,//int in_voxel_resolution,
+		&voxels,//CKvDepot_of_Point3Df *out_set_of_voxels,
+		&colors);//CKvDepot_of_RgbaF *out_set_colors);
+
+	printf("[i_Import]......\n");
+	zz_docube.i_Import(
+		&voxels,//CKvDepot_of_Point3Df *in_3d_points,
+		hh,//int in_hh,
+		ww,//int in_ww,
+		dd,//int in_dd,
+		&colors,//CKvDepot_of_RgbaF *in_depot_colors);
+		false);
+
+	printf("num depot voxel = %d\n", zz_docube.gsp_Get_Surface_Voxels().ne_Number_of_Elements());
+	printf("Num Voxels = %d\n", voxels.ne_Number_of_Elements());
+	printf("Num Colors = %d\n", colors.ne_Number_of_Elements());
+	printf("[Done]\n");
+
+
+	vecDoCube.push_back(zz_docube);
+
+
+
+	if (!io.gof_Get_Open_Filename(".ply file", file_name))
 	{
-		printf("%d) %d\n", i, tmp[i]);
+		return;
 	}
-	
-	printf("==================================\n");
-	int count = 0;
-	for (auto i : tmp)
-	{
-		printf("%d) %d\n", count, i);
-		count++;
-	}
+
+	printf("[Load Ply]......\n");
+	ww = hh = dd = 1024;
+
+	lm_Load_Ply_File_for_Vertex_Color2(
+		file_name,//CKvString &in_filename,
+		ww,//int in_voxel_resolution,
+		&voxels,//CKvDepot_of_Point3Df *out_set_of_voxels,
+		&colors);//CKvDepot_of_RgbaF *out_set_colors);
+
+	printf("[i_Import]......\n");
+	zz_docube.i_Import(
+		&voxels,//CKvDepot_of_Point3Df *in_3d_points,
+		hh,//int in_hh,
+		ww,//int in_ww,
+		dd,//int in_dd,
+		&colors,//CKvDepot_of_RgbaF *in_depot_colors);
+		false);
+
+	printf("num depot voxel = %d\n", zz_docube.gsp_Get_Surface_Voxels().ne_Number_of_Elements());
+	printf("Num Voxels = %d\n", voxels.ne_Number_of_Elements());
+	printf("Num Colors = %d\n", colors.ne_Number_of_Elements());
+	printf("[Done]\n");
+
+	vecDoCube.push_back(zz_docube);
+
+
+	printf("Size : %s\n", vecDoCube.size());
+
+
+
+
+	//std::vector<int> tmp;
+	//int val;
+
+	//for (auto i = 0; i < 10; i++)
+	//{
+	//	val = rand();
+	//	tmp.push_back(val);
+	//}
+
+	//for (int i = 0; i < tmp.size(); i++)
+	//{
+	//	printf("%d) %d\n", i, tmp[i]);
+	//}
+	//
+	//printf("==================================\n");
+	//int count = 0;
+	//for (auto i : tmp)
+	//{
+	//	printf("%d) %d\n", count, i);
+	//	count++;
+	//}
 
 
 

@@ -2034,12 +2034,6 @@ void VCL_Voxel_Scanner_Slice::gcs_Get_Voxel_Idx_in_Plane(
 	count = 0;
 	for (k = 0; k < in_ww; k++)
 	{
-		if (k == 583)
-		{
-			printf("count= %d\n", count);
-		}
-
-		//printf("	slice idx = %d/%d\r", k, in_ww);
 		gfv_Get_Slice_Voxels(
 			&runsets,//CKvXrunset3dShort *in_runsets,
 			in_plane_mode,//int in_plane_mode_0X_1Y_2Z_3zy,
@@ -2102,7 +2096,6 @@ void VCL_Voxel_Scanner_Slice::gcs_Get_Voxel_Idx_in_Plane(
 			{
 				out_texture_on_code[count].list_of_index_for_connectivity[m] = m;
 			}
-			//out_texture_on_code[count].list_of_index_for_connectivity.push_back(-1);
 		}
 		/*******************************************************************************************************/
 		out_texture_on_code[count].voxel_idx_sequences = std::vector<std::vector<int>>(num_obj);

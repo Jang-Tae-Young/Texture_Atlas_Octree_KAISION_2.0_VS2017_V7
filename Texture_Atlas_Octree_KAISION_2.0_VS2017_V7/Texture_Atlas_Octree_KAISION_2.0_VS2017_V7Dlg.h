@@ -32,5 +32,8 @@ protected:
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
+
+	VCL_DoCube_X_Color zz_docube;
+
 	afx_msg void OnBnClickedDebug();
 };

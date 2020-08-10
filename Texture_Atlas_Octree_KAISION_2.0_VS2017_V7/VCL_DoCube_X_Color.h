@@ -10,7 +10,7 @@ public:
 	/****************************************************************************/
 	VCL_DoCube_X_Color();
 	virtual ~VCL_DoCube_X_Color();
-
+	VCL_DoCube_X_Color(const VCL_DoCube_X_Color &T);
 	void cp_Copy_Data(VCL_DoCube_X_Color &in_docube);
 	/********************************************************************/
 	
@@ -209,21 +209,21 @@ protected:
 
 	CKvSet2d_of_XvectorShort    zz_depth_data_w_bp;
 	CKvSet2d_of_XvectorUcharRgb zz_color;
-	CKvSet2d_of_XvectorInt    zz_set_point_to_rl_idx;
+	CKvSet2d_of_XvectorInt      zz_set_point_to_rl_idx;
 
-	CKvSet2d_of_MatrixInt zz_palette_index;
+	CKvSet2d_of_MatrixInt zz_palette_index; // We do not use it. 
 
-	CKvDepot_of_Point3Df zz_surface_point3d;
+	CKvDepot_of_Point3Df zz_surface_point3d; 
 	CKvDepot_of_Voxel zz_surface_voxels;
 
 	CKvDepot_of_RgbaF zz_depot_of_color;
-	CKvMesh_of_Point zz_mesh_of_point;
-	double zz_step_size_;
+	CKvMesh_of_Point zz_mesh_of_point; // We do not use it. 
+	double zz_step_size_; // We do not use it. 
 
-	CKvDepot_of_MatrixInt zz_voxel_index_patch;
+	CKvDepot_of_MatrixInt zz_voxel_index_patch; 
 
-	CKvStopWatch zz_stop_watch;
-	double zz_time;
+	CKvStopWatch zz_stop_watch; // We do not use it. 
+	double zz_time; // We do not use it. 
 
 	template<typename T>
 	inline T limit(const T& value)

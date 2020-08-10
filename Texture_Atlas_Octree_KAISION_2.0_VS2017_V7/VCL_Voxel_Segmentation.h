@@ -47,8 +47,9 @@ public:
 		std::vector<std::vector<std::vector<float>>> &in_voxel_segment,
 		std::vector<std::vector<std::vector<float>>> &in_voxel_color_segment);
 
-protected:
 
+
+protected:
 
 	/*******************************************************************************/
 	void stoc_Segment_Voxel_Slice_Scanned_Data(
