@@ -68,19 +68,6 @@ void VCL_Octree_Texture_Atlas::Generate_Voxel_Map_with_Multiple_Images(
 			mode,//int in_slice_mode_0_X_1_Y_2_Z,
 			divided_voxel_index);//std::vector<std::vector<std::vector<std::vector<int>>>> &io_divided_Texture_on_Code)
 		
-		//for (auto Segment : divided_voxel_index) {
-		//	for (auto Divide : Segment) {
-		//		std::vector<int> circular_shift, offsets;
-		//		atoc_Align_Texture_on_Code(
-		//			in_docube,//VCL_DoCube_X_Color *in_docube,
-		//			in_alignment_mode,//int in_alignment_mode,
-		//			Divide,//std::vector<std::vector<int>> &io_segmented_texture_on_code,
-		//			circular_shift,//std::vector<int> &out_circular_shift,
-		//			offsets);//std::vector<int> &out_offsets)
-		//	}
-		//}
-
-		
 		for (int m = 0; m < divided_voxel_index.size(); m++) {
 			for (int n = 0; n < divided_voxel_index[m].size(); n++) {
 				std::vector<int> circular_shift, offsets;
@@ -90,136 +77,22 @@ void VCL_Octree_Texture_Atlas::Generate_Voxel_Map_with_Multiple_Images(
 					divided_voxel_index[m][n],//std::vector<std::vector<int>> &io_segmented_texture_on_code,
 					circular_shift,//std::vector<int> &out_circular_shift,
 					offsets);//std::vector<int> &out_offsets)
-			}
-		}
-
-
-	}
-
-
-
-
-	/****************************************************************************/
-	/*
-	CKvDepot_of_MatrixInt depot_voxel_idx_maps;
-	CKvDepot_of_MatrixBool depot_voxel_masks;
-
-	depot_voxel_idx_maps.in_Initialize();
-	depot_voxel_masks.in_Initialize();
-	for (auto mode : in_plane_mode_sequence)
-	{
-		std::vector<std::vector<std::vector<float>>> voxels, colors;
-		std::vector<std::vector<std::vector<std::vector<float>>>> divided_voxels, divided_colors;
-		std::vector<std::vector<std::vector<std::vector<int>>>> scanned_voxel_idx;
-		std::vector<int> circular_shift, offsets;
-
-		Set_SubCoord(mode);
-
-		// Step1) Input voxel partitioning. 
-		svd_Segmentation_of_Voxel_Data_along_a_Slice(
-			in_docube,//VCL_DoCube_X_Color *in_docube,
-			mode,//int in_slice_mode_0_X_1_Y_2_Z,
-			voxels,//std::vector<std::vector<std::vector<float>>> &out_voxel_segments,
-			colors);//std::vector<std::vector<std::vector<float>>> &out_voxel_colors);
-
-		// Step2) Partitioned voxels -> Octree ? Quadtree ?.
-		Divide_Voxels(
-			voxels,//std::vector<std::vector<std::vector<float>>> &in_segmented_voxels,
-			colors,//std::vector<std::vector<std::vector<float>>> &in_segmented_colors,
-			mode,//int in_slice_mode_0_X_1_Y_2_Z,
-			divided_voxels,//std::vector<std::vector<std::vector<std::vector<float>>>> &out_segmented_divided_voxels,
-			divided_colors);//std::vector<std::vector<std::vector<std::vector<float>>>> &out_segmented_divided_colors)
-
-		voxels = std::vector<std::vector<std::vector<float>>>();
-		colors = std::vector<std::vector<std::vector<float>>>();
-
-
-		// Step3) Partitioned voxels + Quad -> Texture Maps.
-		Surface_Scanning(
-			divided_voxels,//std::vector<std::vector<std::vector<std::vector<float>>>> &in_segmented_divided_voxels,
-			divided_colors,//std::vector<std::vector<std::vector<std::vector<float>>>> &in_segmented_divided_colors,
-			mode,//int in_slice_mode_0_X_1_Y_2_Z,
-			scanned_voxel_idx);//std::vector<std::vector<std::vector<std::vector<int>>>> &out_scanned_voxel_data)
-		
-		int num_segments = divided_voxels.size();
-		for (int m = 0 ; m < num_segments ; m++) {
-			int num_divide = divided_voxels[m].size();
-			for (int n = 0; n < num_divide; n++) {
-
-				atoc_Align_Texture_on_Code(
-					divided_voxels[m][n],//std::vector<std::vector<float>> &in_point3df,
-					divided_colors[m][n],//std::vector<std::vector<float>> &in_rgbaf,
-					in_alignment_mode,//int in_alignment_mode,
-					scanned_voxel_idx[m][n],//std::vector<std::vector<int>> &io_segmented_texture_on_code,
-					circular_shift,//std::vector<int> &out_circular_shift,
-					offsets);//std::vector<int> &out_offsets)
 
 				CKvMatrixInt colorIdxMap; CKvMatrixBool masks;
 				s_gvm_Generate_Voxel_Map__Intra_Prediction_Coding(
-					scanned_voxel_idx[m][n],//std::vector<std::vector<int>> &in_segmented_texture_on_code,
+					divided_voxel_index[m][n],//std::vector<std::vector<int>> &in_segmented_texture_on_code,
 					offsets,//std::vector<int> &in_offsets,
 					&colorIdxMap,//CKvMatrixInt *out_voxel_color_idx_map,
 					&masks);//CKvMatrixBool *out_masks)
+
+
+
 			}
 		}
 	}
-*/
 
-	/****************************************************************************/
 
-/*
-	//std::vector<bool> voxel_flag;
-	//CKvSet_of_MatrixInt    set_of_voxel_map_idx;
-	//CKvSet_of_MatrixBool   set_of_voxel_map_idx_mask;
-	//CKvDepot_of_MatrixInt  set_of_large_index_maps, set_of_small_index_maps, depot_of_large_index_maps, depot_of_small_index_maps;
-	//CKvDepot_of_MatrixBool set_of_large_masks, set_of_small_masks, depot_of_large_masks, depot_of_small_masks;
 
-	//CKvMatrixInt position_of_segmented_voxel_map;
-	//CKvMatrixUcharRgb *voxel_map;
-	//CKvMatrixInt *voxel_map_idx;
-	//CKvMatrixBool *mask, Max_mask;
-	//int num_plane_mode = in_plane_mode_sequence.size();
-	//int k, num_voxels;
-
-	//voxel_map = out_voxel_maps->c_Create(2);
-	//mask = out_voxel_map_masks->c_Create(2);
-	//voxel_map_idx = out_voxel_idx_maps->c_Create(2);
-
-	//num_voxels = in_docube->gsp_Get_Surface_Points_Pointer()->ne_Number_of_Elements();
-
-	//CKvStopWatch sw;
-	//sw.c_Create(1);
-	//sw.r_Reset(0);
-
-	//voxel_flag = std::vector<bool>(num_voxels, false);
-	//depot_of_large_index_maps.in_Initialize(); depot_of_small_index_maps.in_Initialize();
-	//depot_of_large_masks.in_Initialize();      depot_of_small_masks.in_Initialize();
-	//for (k = 0; k < num_plane_mode; k++)
-	//{
-	//	Partitioning_Voxels_And_Generate_Voxel_Maps(
-	//		in_docube,//VCL_DoCube_X_Color *in_docube,
-	//		in_plane_mode_sequence[k],//int in_plane_mode_sequence,
-	//		zz_alignment_mode,//int in_alignment_mode,
-	//		&set_of_voxel_map_idx,//CKvSet_of_MatrixInt *out_set_of_voxel_map_idx,
-	//		&set_of_voxel_map_idx_mask);//CKvSet_of_MatrixBool *out_set_of_voxel_map_idx_mask)
-
-	//	printf("k=%d/%d) [Extract_Voxel_Patch_Maps]\n", k, num_plane_mode);
-	//	Extract_Voxel_Patch_Maps(
-	//		&set_of_voxel_map_idx,//CKvSet_of_MatrixInt *in_set_of_voxel_maps,
-	//		&set_of_voxel_map_idx_mask,//CKvSet_of_MatrixBool *in_set_of_voxel_map_masks,
-	//		voxel_flag,//std::vector<bool> &in_voxel_flag,
-	//		1,//int in_closing_size,
-	//		&set_of_large_index_maps,//CKvDepot_of_MatrixInt *out_set_of_large_index_maps,
-	//		&set_of_large_masks,//CKvDepot_of_MatrixBool *out_set_of_large_masks,
-	//		&set_of_small_index_maps,//CKvDepot_of_MatrixInt *out_set_of_small_index_maps,
-	//		&set_of_small_masks);//CKvDepot_of_MatrixBool *out_set_of_small_masks);
-
-	//	depot_of_large_index_maps.ap_Append(false, &set_of_large_index_maps, NULL, NULL);
-	//	depot_of_small_index_maps.ap_Append(false, &set_of_small_index_maps, NULL, NULL);
-	//	depot_of_large_masks.ap_Append(false, &set_of_large_masks, NULL, NULL);
-	//	depot_of_small_masks.ap_Append(false, &set_of_small_masks, NULL, NULL);
-	//}
-*/
 
 
 }
