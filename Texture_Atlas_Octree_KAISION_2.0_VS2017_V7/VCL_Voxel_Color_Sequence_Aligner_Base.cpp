@@ -821,6 +821,166 @@ bool VCL_Voxel_Color_Sequence_Aligner_Base::Rotate_Texture_on_Code_by_Centering(
 
 }
 //************************************************************************
+bool VCL_Voxel_Color_Sequence_Aligner_Base::Rotate_Texture_on_Code_by_Centering(
+	std::vector<std::vector<float>>  &in_set_of_voxels,
+	std::vector<int> &io_texture_on_code,
+	int in_plane_mode)
+//************************************************************************
+{
+	//CKvVoxel *p_voxel;
+	int main_cord_min, main_cord_max;
+	int c_cord_main, c_cord_sub, center;
+	int sub_cord_min, sub_cord_max;
+	int sz, k, a, b, min_ab, min_sub, max_sub, min_idx;
+
+	//p_voxel = in_set_of_voxels->vp();
+
+	main_cord_min = INT_MAX;
+	main_cord_max = INT_MIN;
+	sub_cord_min = INT_MAX;
+	sub_cord_max = INT_MIN;
+	min_ab = INT_MAX;
+	min_sub = INT_MAX;
+	max_sub = INT_MIN;
+	if (in_plane_mode == 0) // X-slice
+	{
+		sz = io_texture_on_code.size();
+		for (k = 0; k < sz; k++)
+		{
+			if (main_cord_min > in_set_of_voxels[io_texture_on_code[k]][1])
+			{
+				main_cord_min = in_set_of_voxels[io_texture_on_code[k]][1];
+			}
+
+			if (main_cord_max < in_set_of_voxels[io_texture_on_code[k]][1])
+			{
+				main_cord_max = in_set_of_voxels[io_texture_on_code[k]][1];
+			}
+
+			if (sub_cord_min > in_set_of_voxels[io_texture_on_code[k]][2])
+			{
+				sub_cord_min = in_set_of_voxels[io_texture_on_code[k]][2];
+			}
+
+			if (sub_cord_max < in_set_of_voxels[io_texture_on_code[k]][2])
+			{
+				sub_cord_max = in_set_of_voxels[io_texture_on_code[k]][2];
+			}
+		}
+
+		for (k = 0; k < sz; k++)
+		{
+			a = abs(main_cord_min - in_set_of_voxels[io_texture_on_code[k]][1]);
+			b = abs(main_cord_max - in_set_of_voxels[io_texture_on_code[k]][1]);
+			if (min_ab > abs(a - b))
+			{
+				if (min_sub > in_set_of_voxels[io_texture_on_code[k]][2])
+				{
+					min_ab = abs(a - b);
+					min_sub = in_set_of_voxels[io_texture_on_code[k]][2];
+					min_idx = k;
+				}
+			}
+		}
+	}
+	else if (in_plane_mode == 1) // Y-slice
+	{
+		sz = io_texture_on_code.size();
+		for (k = 0; k < sz; k++)
+		{
+			if (main_cord_min > in_set_of_voxels[io_texture_on_code[k]][0])
+			{
+				main_cord_min = in_set_of_voxels[io_texture_on_code[k]][0];
+			}
+
+			if (main_cord_max < in_set_of_voxels[io_texture_on_code[k]][0])
+			{
+				main_cord_max = in_set_of_voxels[io_texture_on_code[k]][0];
+			}
+
+			if (sub_cord_min > in_set_of_voxels[io_texture_on_code[k]][2])
+			{
+				sub_cord_min = in_set_of_voxels[io_texture_on_code[k]][2];
+			}
+
+			if (sub_cord_max < in_set_of_voxels[io_texture_on_code[k]][2])
+			{
+				sub_cord_max = in_set_of_voxels[io_texture_on_code[k]][2];
+			}
+		}
+
+		for (k = 0; k < sz; k++)
+		{
+			if (in_set_of_voxels[io_texture_on_code[k]][2] == (int)((sub_cord_max + sub_cord_min) / 2))
+			{
+				if (max_sub < in_set_of_voxels[io_texture_on_code[k]][0])
+				{
+					max_sub = in_set_of_voxels[io_texture_on_code[k]][0];
+					min_idx = k;
+				}
+			}
+		}
+	}
+	else if (in_plane_mode == 2) // Z-slice
+	{
+		sz = io_texture_on_code.size();
+		for (k = 0; k < sz; k++)
+		{
+			if (main_cord_min > in_set_of_voxels[io_texture_on_code[k]][0])
+			{
+				main_cord_min = in_set_of_voxels[io_texture_on_code[k]][0];
+			}
+
+			if (main_cord_max < in_set_of_voxels[io_texture_on_code[k]][0])
+			{
+				main_cord_max = in_set_of_voxels[io_texture_on_code[k]][0];
+			}
+
+			if (sub_cord_min > in_set_of_voxels[io_texture_on_code[k]][1])
+			{
+				sub_cord_min = in_set_of_voxels[io_texture_on_code[k]][1];
+			}
+
+			if (sub_cord_max < in_set_of_voxels[io_texture_on_code[k]][1])
+			{
+				sub_cord_max = in_set_of_voxels[io_texture_on_code[k]][1];
+			}
+		}
+
+		/**********************************************************************************************/
+		for (k = 0; k < sz; k++)
+		{
+			if (in_set_of_voxels[io_texture_on_code[k]][0] == (int)((main_cord_max + main_cord_min) / 2))
+			{
+				if (max_sub < in_set_of_voxels[io_texture_on_code[k]][1])
+				{
+					max_sub = in_set_of_voxels[io_texture_on_code[k]][1];
+					min_idx = k;
+				}
+			}
+		}
+		/**********************************************************************************************/
+	}
+
+	center = (int)(sz / 2);
+	a = min_idx - center;
+	if (a > 0)
+	{
+		sv_Circular_Shift_Vector(
+			a,//int in_location,
+			io_texture_on_code);//std::vector<int> &io_vector);
+	}
+	else if (a < 0)
+	{
+		sv_Circular_Shift_Vector(
+			min_idx + sz - center,//int in_location,
+			io_texture_on_code);//std::vector<int> &io_vector);
+	}
+
+
+	return true;
+}
+//************************************************************************
 bool VCL_Voxel_Color_Sequence_Aligner_Base::Rotate_Texture_on_Code_by_Color(
 	CKvSet_of_RgbaF *in_set_of_colors,
 	std::vector<int> &io_texture_on_code,

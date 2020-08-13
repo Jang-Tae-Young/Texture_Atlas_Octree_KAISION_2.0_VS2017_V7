@@ -22,6 +22,26 @@ public:
 		CKvSet_of_VectorInt *out_circular_shift,
 		CKvSet_of_VectorInt *out_offset);
 
+	void acc_Align_Texture_on_Codes_Using_Voxel_Color_Difference2(
+		VCL_DoCube_X_Color *in_docube,
+		std::vector<std::vector<std::vector<int>>> &io_segmented_texture_on_code,
+		CKvSet_of_VectorInt *out_circular_shift,
+		CKvSet_of_VectorInt *out_offset);
+
+	void acc_Align_Texture_on_Codes_Using_Voxel_Color_Difference2(
+		VCL_DoCube_X_Color *in_docube,
+		std::vector<std::vector<int>> &io_segmented_texture_on_code,
+		std::vector<int> &out_circular_shift,
+		std::vector<int> &out_offset);
+
+	void acc_Align_Texture_on_Codes_Using_Voxel_Color_Difference2(
+		std::vector<std::vector<float>> &in_voxels,
+		std::vector<std::vector<float>> &in_colors,
+		std::vector<std::vector<int>> &io_texture_on_code,
+		std::vector<int> &out_circular_shift,
+		std::vector<int> &out_offset);
+
+
 	void acc_Align_Texture_on_Codes_Using_Voxel_Color_Difference2_for_video(
 		VCL_DoCube_X_Color *in_docube,
 		std::vector<std::vector<std::vector<int>>> &io_segmented_texture_on_code,
@@ -70,6 +90,13 @@ protected:
 		std::vector<int> &in_reference_texture_on_code,
 		std::vector<int> &io_target_texture_on_code,
 		int &out_offset); 
+
+	int atd_Align_Two_Texture_on_Codes_Using_Color_Difference(
+		std::vector<std::vector<float>> &in_set_of_voxel_colors,
+		std::vector<int> &in_reference_texture_on_code,
+		std::vector<int> &io_target_texture_on_code,
+		int &out_offset);
+
 
 	int atd_Align_Two_Texture_on_Codes_Using_Color_Difference2(
 		CKvSet_of_RgbaF *in_set_of_voxel_colors,

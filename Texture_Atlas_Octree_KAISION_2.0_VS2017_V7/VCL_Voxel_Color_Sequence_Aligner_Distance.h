@@ -19,6 +19,20 @@ public:
 		CKvSet_of_VectorInt *out_circular_shift,
 		CKvSet_of_VectorInt *out_offset);
 
+	void acc_Align_Texture_on_Codes_Using_Voxel_Euclidean_Distance2(
+		VCL_DoCube_X_Color *in_docube,
+		std::vector<std::vector<int>> &io_segmented_texture_on_code,
+		std::vector<int> &out_circular_shift,
+		std::vector<int> &out_offset);
+
+	void acc_Align_Texture_on_Codes_Using_Voxel_Euclidean_Distance(
+		std::vector<std::vector<float>> &in_voxels,
+		std::vector<std::vector<int>> &io_texture_on_code,
+		std::vector<int> &out_circular_shift,
+		std::vector<int> &out_offset);
+
+
+
 	void acc_Align_Texture_on_Codes_Using_Voxel_Euclidean_Distance2_for_video(
 		VCL_DoCube_X_Color *in_docube,
 		std::vector<std::vector<std::vector<int>>> &io_segmented_texture_on_code,
@@ -67,6 +81,12 @@ protected:
 
 	int atd_Align_Two_Texture_on_Codes_Using_Euclidean_Distance(
 		CKvSet_of_Voxel *in_set_of_voxels,
+		std::vector<int> &in_reference_texture_on_code,
+		std::vector<int> &io_target_texture_on_code,
+		int &out_offset);
+
+	int atd_Align_Two_Texture_on_Codes_Using_Euclidean_Distance(
+		std::vector<std::vector<float>> &in_set_of_voxels,
 		std::vector<int> &in_reference_texture_on_code,
 		std::vector<int> &io_target_texture_on_code,
 		int &out_offset);

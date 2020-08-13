@@ -219,6 +219,40 @@ void VCL_Voxel_Segmentation::svd_Segmentation_of_Voxel_Data_along_a_Slice(
 		out_voxel_colors);//std::vector<std::vector<std::vector<float>>> &out_voxel_colors)
 }
 //************************************************************************
+void VCL_Voxel_Segmentation::svd_Segmentation_of_Voxel_Data_along_a_Slice(
+	VCL_DoCube_X_Color *in_docube,
+	int in_slice_mode_0_X_1_Y_2_Z,
+	std::vector<std::vector<std::vector<int>>> &out_voxel_index)
+//************************************************************************
+{
+	CKvStopWatch sw;
+	std::vector<Voxel_Slice_Scanned_Data> sd;
+	//std::vector<std::vector<std::vector<int>>> segment;
+	int ww, hh, dd;
+
+	in_docube->gr_Get_Resolution(ww, hh, dd);
+	printf("ww=%d hh=%d dd=%d\n", ww, hh, dd);
+	printf("[gcs_Get_Peeling_Voxel_Sequence_Plane_Mode_%d]\n", in_slice_mode_0_X_1_Y_2_Z);
+
+	sw.c_Create(1);
+	sw.r_Reset(0);
+	gcs_Get_Voxel_Idx_in_Plane(
+		in_docube,//VCL_DoCube_X_Color *in_docube,
+		in_slice_mode_0_X_1_Y_2_Z,//int &in_plane_mode,
+		ww,//int &in_ww,
+		hh,//int &in_hh,
+		dd,//int &in_dd,
+		sd);//std::vector<Voxel_Slice_Scanned_Data> &out_texture_on_code);
+	printf("[gcs_Get_Voxel_Idx_in_Plane] Time : %lf", sw.get_Get_Elapsed_Time(0));
+
+	printf("[stoc_Segment_Voxel_Slice_Scanned_Data]\n");
+	sw.r_Reset(0);
+	stoc_Segment_Voxel_Slice_Scanned_Data(
+		sd,//std::vector<Voxel_Slice_Scanned_Data> &in_texture_on_code,
+		out_voxel_index);//std::vector<std::vector<std::vector<int>>> &out_segmented_texture_on_code)
+	printf("[stoc_Segment_Voxel_Slice_Scanned_Data] Time : %lf", sw.get_Get_Elapsed_Time(0));
+}
+//************************************************************************
 void VCL_Voxel_Segmentation::psr_Plot_Segmentation_Result(
 	CKvSet_of_Xrunset3dShort *in_voxel_segments)
 //************************************************************************

@@ -1,6 +1,7 @@
 #ifndef VCL_DOCUBE_X_COLOR
 #define VCL_DOCUBE_X_COLOR
 
+#include <vector>
 //#include <VCL_DoCube.h>
 
 class VCL_DoCube_X_Color : public VCL_DoCube, public CKvSdkimChainCode
@@ -9,6 +10,44 @@ public:
 
 	/****************************************************************************/
 	VCL_DoCube_X_Color();
+	template <typename T>	
+	VCL_DoCube_X_Color(
+		std::vector<std::vector<T>> &in_voxel_list,
+		std::vector<std::vector<T>> &in_color_list,
+		int in_ww,
+		int in_hh,
+		int in_dd)
+	{
+		CKvDepot_of_Point3Df point3df;
+		CKvDepot_of_RgbaF rgbaf;
+		int dum; float rgba[4], xyz[3];
+
+		int num = in_voxel_list.size();
+		for (int k = 0; k < num; k++) {
+
+			xyz[0] = (float)in_voxel_list[k][0];
+			xyz[1] = (float)in_voxel_list[k][1];
+			xyz[2] = (float)in_voxel_list[k][2];
+
+			point3df.ap_Append(false, xyz, dum);
+
+			rgba[0] = (float)in_color_list[k][0];
+			rgba[1] = (float)in_color_list[k][1];
+			rgba[2] = (float)in_color_list[k][2];
+			rgba[3] = 0.f;
+
+			rgbaf.ap_Append(false, rgba, dum);
+		}
+
+		this->i_Import(
+			&point3df,//CKvDepot_of_Point3Df *in_3d_points,
+			in_hh,//int in_hh,
+			in_ww,//int in_ww,
+			in_dd,//int in_dd,
+			&rgbaf,//CKvDepot_of_RgbaF *in_depot_colors_or_NULL,
+			false);//bool in_inverse_true_or_false)
+	}
+
 	virtual ~VCL_DoCube_X_Color();
 	VCL_DoCube_X_Color(const VCL_DoCube_X_Color &T);
 	void cp_Copy_Data(VCL_DoCube_X_Color &in_docube);
@@ -24,6 +63,47 @@ public:
 		int in_dd,
 		CKvDepot_of_RgbaF *in_depot_colors,
 		bool in_inverse_true_or_false);
+
+	template <typename T>
+	void i_Import(
+		std::vector<std::vector<T>> &in_voxel_list,
+		std::vector<std::vector<T>> &in_color_list,
+		int in_ww,
+		int in_hh,
+		int in_dd)
+	{
+		CKvDepot_of_Point3Df point3df;
+		CKvDepot_of_RgbaF rgbaf;
+		int dum; float rgba[4], xyz[3];
+
+		int num = in_voxel_list.size();
+		for (int k = 0; k < num; k++) {
+
+			xyz[0] = (float)in_voxel_list[k][0];
+			xyz[1] = (float)in_voxel_list[k][1];
+			xyz[2] = (float)in_voxel_list[k][2];
+
+			point3df.ap_Append(false, xyz, dum);
+
+			rgba[0] = in_color_list[k][0];
+			rgba[1] = in_color_list[k][1];
+			rgba[2] = in_color_list[k][2];
+			rgba[3] = 0.f;
+
+			rgbaf.ap_Append(false, rgba, dum);
+		}
+
+		this->i_Import(
+			&point3df,//CKvDepot_of_Point3Df *in_3d_points,
+			in_hh,//int in_hh,
+			in_ww,//int in_ww,
+			in_dd,//int in_dd,
+			&rgbaf,//CKvDepot_of_RgbaF *in_depot_colors_or_NULL,
+			false);//bool in_inverse_true_or_false)
+	}
+
+
+
 	void i_Import_ordered_data(
 		CKvDepot_of_Point3Df *in_3d_points,
 		int in_hh,

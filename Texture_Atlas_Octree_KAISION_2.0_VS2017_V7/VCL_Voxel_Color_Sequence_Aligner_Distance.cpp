@@ -156,6 +156,141 @@ void VCL_Voxel_Color_Sequence_Aligner_Distance::acc_Align_Texture_on_Codes_Using
 
 }
 //************************************************************************
+void VCL_Voxel_Color_Sequence_Aligner_Distance::acc_Align_Texture_on_Codes_Using_Voxel_Euclidean_Distance2(
+	VCL_DoCube_X_Color *in_docube,
+	std::vector<std::vector<int>> &io_segmented_texture_on_code,
+	std::vector<int> &out_circular_shift,
+	std::vector<int> &out_offset)
+//************************************************************************
+{
+	CKvDepot_of_Voxel v; CKvSet_of_Voxel set_v;
+	CKvVectorInt *p_vec, *p_cs;
+	int num_blob, num_toc, num, sz, m, n;
+	int *p_v, *p_pcs;
+	int criteria_idx, max_length;
+
+	v = in_docube->gsp_Get_Surface_Voxels();
+	v.e_Export(&set_v); v.in_Initialize();
+
+	num_toc = io_segmented_texture_on_code.size();
+	if (num_toc == 0) return;
+
+	out_circular_shift = std::vector<int>(num_toc);
+	out_offset = std::vector<int>(num_toc);
+
+	/*****************************************************************************************/
+	// Find Largest texture on code
+	max_length = -1;
+	for (n = 0; n < num_toc; n++)
+	{
+		if (max_length < (int)(io_segmented_texture_on_code[n].size()))
+		{
+			max_length = (int)(io_segmented_texture_on_code[n].size());
+			criteria_idx = n;
+		}
+	}
+	/*****************************************************************************************/
+
+	/*****************************************************************************************/
+	// Align Largest texture on code.  -> Using Geometry
+	Rotate_Texture_on_Code_by_Centering(
+		&set_v,//CKvSet_of_Voxel *in_set_of_voxels,
+		io_segmented_texture_on_code[criteria_idx],//std::vector<int> &io_texture_on_code,
+		1);//int in_plane_mode)
+	/*****************************************************************************************/
+
+	/*****************************************************************************************/
+	// Align Start
+	for (n = criteria_idx + 1; n < num_toc; n++)
+	{
+		out_circular_shift[n] = atd_Align_Two_Texture_on_Codes_Using_Euclidean_Distance(
+			&set_v,//CKvSet_of_Voxel *in_set_of_voxels,
+			io_segmented_texture_on_code[n - 1],//std::vector<int> &in_reference_texture_on_code,
+			io_segmented_texture_on_code[n],//std::vector<int> &io_target_texture_on_code,
+			out_offset[n]);//int &out_offset);
+
+		out_offset[n] = out_offset[n] + out_offset[n - 1];
+	}
+
+	for (n = criteria_idx - 1; n > -1; n--)
+	{
+		out_circular_shift[n] = atd_Align_Two_Texture_on_Codes_Using_Euclidean_Distance(
+			&set_v,//CKvSet_of_Voxel *in_set_of_voxels,
+			io_segmented_texture_on_code[n + 1],//std::vector<int> &in_reference_texture_on_code,
+			io_segmented_texture_on_code[n],//std::vector<int> &io_target_texture_on_code,
+			out_offset[n]);//int &out_offset);
+
+		out_offset[n] = out_offset[n] + out_offset[n + 1];
+	}
+	/*****************************************************************************************/
+
+}
+//************************************************************************
+void VCL_Voxel_Color_Sequence_Aligner_Distance::acc_Align_Texture_on_Codes_Using_Voxel_Euclidean_Distance(
+	std::vector<std::vector<float>> &in_voxels,
+	std::vector<std::vector<int>> &io_texture_on_code,
+	std::vector<int> &out_circular_shift,
+	std::vector<int> &out_offset)
+//************************************************************************
+{
+	int criteria_idx, max_length;
+	int num_toc;
+
+	num_toc = io_texture_on_code.size();
+
+	out_circular_shift = std::vector<int>(num_toc, 0);
+	out_offset         = std::vector<int>(num_toc, 0);
+
+	/*****************************************************************************************/
+	// Find Largest texture on code
+	max_length = -1;
+	for (int n = 0; n < num_toc; n++)
+	{
+		if (max_length < (int)(io_texture_on_code[n].size()))
+		{
+			max_length = (int)(io_texture_on_code[n].size());
+			criteria_idx = n;
+		}
+	}
+	/*****************************************************************************************/
+
+	/*****************************************************************************************/
+	// Align Largest texture on code.  -> Using Geometry
+	Rotate_Texture_on_Code_by_Centering(
+		in_voxels,//std::vector<std::vector<float>> &in_set_of_voxels, 
+		io_texture_on_code[criteria_idx],//std::vector<int> &io_texture_on_code,
+		1);//int in_plane_mode)
+	/*****************************************************************************************/
+
+	/*****************************************************************************************/
+	// Align Start
+	for (int n = criteria_idx + 1; n < num_toc; n++)
+	{
+		out_circular_shift[n] = atd_Align_Two_Texture_on_Codes_Using_Euclidean_Distance(
+			in_voxels,//std::vector<std::vector<float>>  *in_set_of_voxels,
+			io_texture_on_code[n - 1],//std::vector<int> &in_reference_texture_on_code,
+			io_texture_on_code[n],//std::vector<int> &io_target_texture_on_code,
+			out_offset[n]);//int &out_offset);
+
+		out_offset[n] = out_offset[n] + out_offset[n - 1];
+	}
+
+	for (int n = criteria_idx - 1; n > -1; n--)
+	{
+		out_circular_shift[n] = atd_Align_Two_Texture_on_Codes_Using_Euclidean_Distance(
+			in_voxels,//std::vector<std::vector<float>>  *in_set_of_voxels,
+			io_texture_on_code[n + 1],//std::vector<int> &in_reference_texture_on_code,
+			io_texture_on_code[n],//std::vector<int> &io_target_texture_on_code,
+			out_offset[n]);//int &out_offset);
+
+		out_offset[n] = out_offset[n] + out_offset[n + 1];
+	}
+	/*****************************************************************************************/
+
+
+
+}
+//************************************************************************
 void VCL_Voxel_Color_Sequence_Aligner_Distance::acc_Align_Texture_on_Codes_Using_Voxel_Euclidean_Distance2_for_video(
 	VCL_DoCube_X_Color *in_docube,
 	std::vector<std::vector<std::vector<int>>> &io_segmented_texture_on_code,
@@ -662,6 +797,94 @@ int VCL_Voxel_Color_Sequence_Aligner_Distance::atd_Align_Two_Texture_on_Codes_Us
 					for (k = 0; k < search_length; k++)
 					{
 						cost += (double)p_v[in_reference_texture_on_code[k + j]].ds_Distance_Squared(p_v[tmp[k]]);
+					}
+				}
+
+				if (min_cost > cost)
+				{
+					min_cost = cost;
+					circular_shift_idx = l;
+					out_offset = j;
+				}
+			}
+		}
+	}
+
+	sv_Circular_Shift_Vector(circular_shift_idx, io_target_texture_on_code);
+
+	return circular_shift_idx;
+}
+//************************************************************************
+int VCL_Voxel_Color_Sequence_Aligner_Distance::atd_Align_Two_Texture_on_Codes_Using_Euclidean_Distance(
+	std::vector<std::vector<float>> &in_set_of_voxels,
+	std::vector<int> &in_reference_texture_on_code,
+	std::vector<int> &io_target_texture_on_code,
+	int &out_offset)
+//************************************************************************
+{
+	std::vector<int> tmp;
+	double cost, min_cost;
+	int sz1, sz2, length, search_length, circular_shift_idx, k, l, j;
+
+	sz1 = in_reference_texture_on_code.size();
+	sz2 = io_target_texture_on_code.size();
+
+	if (sz1 > sz2) { search_length = sz2; }
+	else { search_length = sz1; }
+	length = abs(sz2 - sz1) + 1;
+
+	//p_v = in_set_of_voxels->vp();
+	//min_cost = 999999999999999999.9999999;
+	min_cost = DBL_MAX;
+
+	if (sz1 < sz2)
+	{
+		for (j = 0; j < length; j++)
+		{
+			for (l = 0; l < sz2; l++)
+			{
+				tmp = io_target_texture_on_code;
+				sv_Circular_Shift_Vector(l, tmp);
+				cost = 0.0;
+#pragma omp parallel
+				{
+#pragma omp for reduction(+:cost)
+					for (k = 0; k < search_length; k++)
+					{
+						//cost += (double)p_v[in_reference_texture_on_code[k]].ds_Distance_Squared(p_v[tmp[k + j]]);
+						cost += (double)(pow( in_set_of_voxels[in_reference_texture_on_code[k]][0] - in_set_of_voxels[tmp[k+j]][0], 2.0) +
+										 pow(in_set_of_voxels[in_reference_texture_on_code[k]][1] - in_set_of_voxels[tmp[k + j]][1], 2.0) + 
+										 pow(in_set_of_voxels[in_reference_texture_on_code[k]][2] - in_set_of_voxels[tmp[k + j]][2], 2.0));
+					}
+				}
+
+				if (min_cost > cost)
+				{
+					min_cost = cost;
+					circular_shift_idx = l;
+					out_offset = -j;
+				}
+			}
+		}
+	}
+	else
+	{
+		for (j = 0; j < length; j++)
+		{
+			for (l = 0; l < sz2; l++)
+			{
+				tmp = io_target_texture_on_code;
+				sv_Circular_Shift_Vector(l, tmp);
+				cost = 0.0;
+#pragma omp parallel
+				{
+#pragma omp for reduction(+:cost)
+					for (k = 0; k < search_length; k++)
+					{
+						//cost += (double)p_v[in_reference_texture_on_code[k + j]].ds_Distance_Squared(p_v[tmp[k]]);
+						cost += (double)(pow(in_set_of_voxels[in_reference_texture_on_code[k+j]][0] - in_set_of_voxels[tmp[k]][0], 2.0) +
+										 pow(in_set_of_voxels[in_reference_texture_on_code[k+j]][1] - in_set_of_voxels[tmp[k]][1], 2.0) +
+										 pow(in_set_of_voxels[in_reference_texture_on_code[k+j]][2] - in_set_of_voxels[tmp[k]][2], 2.0));
 					}
 				}
 

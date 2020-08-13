@@ -36,6 +36,10 @@ public:
 		std::vector<std::vector<std::vector<float>>> &out_voxel_segments,
 		std::vector<std::vector<std::vector<float>>> &out_voxel_colors);
 
+	void svd_Segmentation_of_Voxel_Data_along_a_Slice(
+		VCL_DoCube_X_Color *in_docube,
+		int in_slice_mode_0_X_1_Y_2_Z,
+		std::vector<std::vector<std::vector<int>>> &out_voxel_index);
 
 	void psr_Plot_Segmentation_Result(
 		CKvSet_of_Xrunset3dShort *in_voxel_segments);

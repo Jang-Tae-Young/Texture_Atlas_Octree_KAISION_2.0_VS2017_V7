@@ -85,6 +85,11 @@ public:
 		std::vector<int> &io_texture_on_code,
 		int in_plane_mode);
 
+	bool Rotate_Texture_on_Code_by_Centering(
+		std::vector<std::vector<float>> &in_set_of_voxels,
+		std::vector<int> &io_texture_on_code,
+		int in_plane_mode);
+
 	bool Rotate_Texture_on_Code_by_Color(
 		CKvSet_of_RgbaF *in_set_of_colors,
 		std::vector<int> &io_texture_on_code,

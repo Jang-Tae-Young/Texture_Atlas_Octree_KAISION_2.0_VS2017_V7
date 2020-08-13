@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "VCL_Voxel_Color_Sequence_Aligner.h"
-
+#include <algorithm>
 
 //************************************************************************
 VCL_Voxel_Color_Sequence_Aligner::VCL_Voxel_Color_Sequence_Aligner()
@@ -98,6 +98,79 @@ void VCL_Voxel_Color_Sequence_Aligner::atoc_Align_Texture_on_Code(
 		{
 			p_po[n] = p_po[n] - min_value;
 		}
+	}
+
+}
+//************************************************************************
+void VCL_Voxel_Color_Sequence_Aligner::atoc_Align_Texture_on_Code(
+	std::vector<std::vector<float>> &in_point3df,
+	std::vector<std::vector<float>> &in_rgbaf,
+	int in_alignment_mode,
+	std::vector<std::vector<int>> &io_segmented_texture_on_code,
+	std::vector<int> &out_circular_shift,
+	std::vector<int> &out_offsets)
+//************************************************************************
+{
+	if (in_alignment_mode == 0)
+	{
+		acc_Align_Texture_on_Codes_Using_Voxel_Euclidean_Distance(
+			in_point3df,//std::vector<std::vector<float>> &in_voxels,
+			io_segmented_texture_on_code,//std::vector<std::vector<int>> &io_texture_on_code,
+			out_circular_shift,//std::vector<int> &out_circular_shift,
+			out_offsets);//std::vector<int> &out_offset);
+	}
+	else if (in_alignment_mode == 1)
+	{
+		acc_Align_Texture_on_Codes_Using_Voxel_Color_Difference2(
+			in_point3df,//std::vector<std::vector<float>> &in_voxels,
+			in_rgbaf,//std::vector<std::vector<float>> &in_colors,
+			io_segmented_texture_on_code,//std::vector<std::vector<int>> &io_texture_on_code,
+			out_circular_shift,//std::vector<int> &out_circular_shift,
+			out_offsets);//std::vector<int> &out_offset);
+	}
+	else if (in_alignment_mode == 2)
+	{
+
+	}
+
+	float min_value = *std::min_element(out_circular_shift.begin(), out_circular_shift.end());
+	for (int m = 0; m < out_circular_shift.size(); m++) {
+		out_circular_shift[m] -= min_value;
+	}
+}
+//************************************************************************
+void VCL_Voxel_Color_Sequence_Aligner::atoc_Align_Texture_on_Code(
+	VCL_DoCube_X_Color *in_docube,
+	int in_alignment_mode,
+	std::vector<std::vector<int>> &io_segmented_texture_on_code,
+	std::vector<int> &out_circular_shift,
+	std::vector<int> &out_offsets)
+//************************************************************************
+{
+	if (in_alignment_mode == 0)
+	{
+		acc_Align_Texture_on_Codes_Using_Voxel_Euclidean_Distance2(
+			in_docube,//VCL_DoCube_X_Color *in_docube,
+			io_segmented_texture_on_code,//std::vector<std::vector<int>> &io_texture_on_code,
+			out_circular_shift,//std::vector<int> &out_circular_shift,
+			out_offsets);//std::vector<int> &out_offset);
+	}
+	else if (in_alignment_mode == 1)
+	{
+		acc_Align_Texture_on_Codes_Using_Voxel_Color_Difference2(
+			in_docube,//VCL_DoCube_X_Color *in_docube,
+			io_segmented_texture_on_code,//std::vector<std::vector<int>> &io_texture_on_code,
+			out_circular_shift,//std::vector<int> &out_circular_shift,
+			out_offsets);//std::vector<int> &out_offset);
+	}
+	else if (in_alignment_mode == 2)
+	{
+
+	}
+
+	float min_value = *std::min_element(out_circular_shift.begin(), out_circular_shift.end());
+	for (int m = 0; m < out_circular_shift.size(); m++) {
+		out_circular_shift[m] -= min_value;
 	}
 
 }

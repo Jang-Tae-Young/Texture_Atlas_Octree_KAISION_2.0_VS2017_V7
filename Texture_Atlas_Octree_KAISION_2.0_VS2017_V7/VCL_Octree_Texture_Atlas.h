@@ -2,13 +2,14 @@
 #include "VCL_Voxel_Color_Map.h"
 #include "VCL_Voxel_Texture_Atlas_3_Direction.h"
 #include "VCL_Voxel_Segmentation.h"
-//#include "VCL_Voxel_Color_Sequence_Aligner.h"
+#include "VCL_Voxel_Color_Sequence_Aligner.h"
 //#include "Voxel_Slice_Scanned_Data.h"
 #include <vector>
 
 
 class VCL_Octree_Texture_Atlas : public VCL_Voxel_Color_Map,
-								 public VCL_Voxel_Segmentation
+								 public VCL_Voxel_Segmentation,
+								 public VCL_Voxel_Color_Sequence_Aligner
 {
 public:
 	VCL_Octree_Texture_Atlas();
@@ -42,12 +43,12 @@ protected:
 
 	void Set_SubCoord(int in_slice_mode_0_X_1_Y_2_Z) {
 		if (in_slice_mode_0_X_1_Y_2_Z == 0) {
-			zz_coord0 = 1;
-			zz_coord1 = 2;
+			zz_coord0 = 2;
+			zz_coord1 = 1;
 		}
 		else if (in_slice_mode_0_X_1_Y_2_Z == 1) {
-			zz_coord0 = 0;
-			zz_coord1 = 2;
+			zz_coord0 = 2;
+			zz_coord1 = 0;
 		}
 		else {
 			zz_coord0 = 0;
@@ -55,10 +56,10 @@ protected:
 		}
 	}
 
-	void Segment_Voxel_Data(
+	void Segmentation_And_Surface_Scanning(
 		VCL_DoCube_X_Color *in_docube,
-		int in_slice_mode,
-		VCL_DoCube_X_Color *out_segmented_docube);
+		int in_slice_mode_0_X_1_Y_2_Z,
+		std::vector<std::vector<std::vector<int>>> &out_voxel_index);
 
 	void Divide_Voxels(
 		std::vector<std::vector<std::vector<float>>> &in_segmented_voxels,
@@ -67,8 +68,60 @@ protected:
 		std::vector<std::vector<std::vector<std::vector<float>>>> &out_segmented_divided_voxels,
 		std::vector<std::vector<std::vector<std::vector<float>>>> &out_segmented_divided_colors);
 
+	void Divide_Voxels(
+		VCL_DoCube_X_Color *in_docube,
+		int in_slice_mode_0_X_1_Y_2_Z,
+		std::vector<std::vector<std::vector<int>>> &in_voxel_index,
+		std::vector<std::vector<std::vector<std::vector<int>>>> &out_divided_voxel_index);
+
+	void Ordering_Texture_on_Codes(
+		VCL_DoCube_X_Color *in_docube,
+		int in_slice_mode_0_X_1_Y_2_Z,
+		std::vector<std::vector<std::vector<std::vector<int>>>> &io_divided_Texture_on_Code);
+
+	void Ordering_Texture_on_Code(
+		VCL_DoCube_X_Color *in_docube,
+		int in_slice_mode_0_X_1_Y_2_Z,
+		std::vector<int> &io_ToC);
+
+	void Surface_Scanning(
+		std::vector<std::vector<std::vector<std::vector<float>>>> &in_segmented_divided_voxels,
+		std::vector<std::vector<std::vector<std::vector<float>>>> &in_segmented_divided_colors,
+		int in_slice_mode_0_X_1_Y_2_Z,
+		std::vector<std::vector<std::vector<Voxel_Slice_Scanned_Data>>> &out_scanned_voxel_data);
+
+	void Surface_Scanning(
+		std::vector<std::vector<std::vector<std::vector<float>>>> &in_segmented_divided_voxels,
+		std::vector<std::vector<std::vector<std::vector<float>>>> &in_segmented_divided_colors,
+		int in_slice_mode_0_X_1_Y_2_Z,
+		std::vector<std::vector<std::vector<std::vector<int>>>> &out_scanned_voxel_data);
+
+	bool gvsi_Get_Voxel_Sequence(
+		VCL_DoCube_X_Color *in_docube,
+		int &in_plane_mode_sequence,
+		std::vector<Voxel_Slice_Scanned_Data> &out_voxel_sequence);
+
+	bool gvsi_Get_New_Voxel_Sequence(
+		VCL_DoCube_X_Color *in_docube,
+		int in_slice_mode_0_X_1_Y_2_Z,
+		std::vector<int> &io_ToC);
+
+
+	bool s_gvm_Generate_Voxel_Map__Intra_Prediction_Coding(
+		std::vector<std::vector<int>> &in_segmented_texture_on_code,
+		std::vector<int> &in_offsets,
+		CKvMatrixInt *out_voxel_color_idx_map,
+		CKvMatrixBool *out_masks);
+
 	void MinMax(
 		std::vector<std::vector<float>> &in_voxels,
+		int in_slice_mode_0_X_1_Y_2_Z,
+		std::vector<float> &outMinMax_0,
+		std::vector<float> &outMinMax_1);
+
+	void MinMax(
+		VCL_DoCube_X_Color *in_docube,
+		std::vector<std::vector<int>> &in_Blob_ToC,
 		int in_slice_mode_0_X_1_Y_2_Z,
 		std::vector<float> &outMinMax_0,
 		std::vector<float> &outMinMax_1);
@@ -83,5 +136,6 @@ protected:
 	int zz_alignment_mode;
 
 	int zz_coord0, zz_coord1;
+	int zz_ww, zz_hh, zz_dd;
 
 };

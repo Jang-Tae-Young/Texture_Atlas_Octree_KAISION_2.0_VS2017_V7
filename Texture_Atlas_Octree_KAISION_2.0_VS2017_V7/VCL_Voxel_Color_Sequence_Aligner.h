@@ -39,6 +39,21 @@ protected:
 		CKvSet_of_VectorInt *out_circular_shift,
 		CKvSet_of_VectorInt *out_offsets);
 
+	void atoc_Align_Texture_on_Code(
+		std::vector<std::vector<float>> &in_point3df,
+		std::vector<std::vector<float>> &in_rgbaf,
+		int in_alignment_mode,
+		std::vector<std::vector<int>> &io_segmented_texture_on_code,
+		std::vector<int> &out_circular_shift,
+		std::vector<int> &out_offsets);
+
+	void atoc_Align_Texture_on_Code(
+		VCL_DoCube_X_Color *in_docube,
+		int in_alignment_mode,
+		std::vector<std::vector<int>> &io_segmented_texture_on_code,
+		std::vector<int> &out_circular_shift,
+		std::vector<int> &out_offsets);
+
 	void atoc_Align_Texture_on_Code_for_Video_Color(
 		VCL_DoCube_X_Color *in_docube,
 		int in_alignment_mode,
